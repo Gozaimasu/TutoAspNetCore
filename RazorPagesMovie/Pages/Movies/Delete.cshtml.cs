@@ -20,7 +20,7 @@ public class DeleteModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Movie == null)
+        if (id == null)
         {
             return NotFound();
         }
@@ -38,18 +38,17 @@ public class DeleteModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (id == null || _context.Movie == null)
+        if (id == null)
         {
             return NotFound();
         }
         var movie = await _context.Movie.FindAsync(id);
 
-        if (movie != null)
-        {
-            Movie = movie;
-            _context.Movie.Remove(Movie);
-            await _context.SaveChangesAsync();
-        }
+        if (movie == null) return RedirectToPage("./Index");
+        
+        Movie = movie;
+        _context.Movie.Remove(Movie);
+        await _context.SaveChangesAsync();
 
         return RedirectToPage("./Index");
     }
