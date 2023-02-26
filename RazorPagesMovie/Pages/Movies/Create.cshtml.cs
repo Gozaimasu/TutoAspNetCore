@@ -1,17 +1,18 @@
+using CleanMovie.Application.UseCases.CreateMovie;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesMovie.Data;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;
 
-public class CreateModel : PageModel
+public class CreateModel : PageModel, IOutputPort
 {
-    private readonly RazorPagesMovieContext _context;
+    private readonly ICreateMovieUseCase _creatingMovieUseCase;
+    private IActionResult? _viewModel;
 
-    public CreateModel(RazorPagesMovieContext context)
+    public CreateModel(ICreateMovieUseCase creatingMovieUseCase)
     {
-        _context = context;
+        _creatingMovieUseCase = creatingMovieUseCase;
     }
 
     public IActionResult OnGet()
@@ -31,9 +32,27 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        _context.Movie.Add(Movie);
-        await _context.SaveChangesAsync();
+        _creatingMovieUseCase.SetOutputPort(this);
 
-        return RedirectToPage("./Index");
+        await _creatingMovieUseCase.ExecuteAsync(Movie.Title!, Movie.ReleaseDate, Movie.Genre!, Movie.Price, Movie.Rating);
+
+        return _viewModel!;
     }
+
+    #region IOutputPort
+    void IOutputPort.Ok(CleanMovie.Domain.Movie movie)
+    {
+        _viewModel = RedirectToPage("./Index");
+    }
+
+    void IOutputPort.NotFound()
+    {
+        _viewModel = NotFound();
+    }
+
+    void IOutputPort.Invalid()
+    {
+        _viewModel = Page();
+    }
+    #endregion
 }

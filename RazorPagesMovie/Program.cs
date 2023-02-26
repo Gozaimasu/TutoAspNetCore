@@ -1,13 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Data;
-using RazorPagesMovie.Models;
+using CleanMovie.Infrastructure.DataAccess.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<RazorPagesMovieContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesMovieContext' not found.")));
+builder.Services.UseEntityFramework(builder.Configuration);
+builder.Services.AddUseCases();
 
 var app = builder.Build();
 

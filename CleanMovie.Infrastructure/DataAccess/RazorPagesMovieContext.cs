@@ -1,11 +1,11 @@
+using CleanMovie.Infrastructure.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Models;
 
-namespace RazorPagesMovie.Data;
+namespace CleanMovie.Infrastructure.DataAccess;
 
 public class RazorPagesMovieContext : DbContext
 {
-    public RazorPagesMovieContext (DbContextOptions<RazorPagesMovieContext> options)
+    public RazorPagesMovieContext(DbContextOptions<RazorPagesMovieContext> options)
         : base(options)
     {
     }

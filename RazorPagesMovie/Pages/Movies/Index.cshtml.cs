@@ -1,19 +1,18 @@
+using CleanMovie.Application.UseCases.GetMovies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Data;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;
 
-public class IndexModel : PageModel
+public class IndexModel : PageModel, IGetMoviesOutputPort
 {
-    private readonly RazorPagesMovieContext _context;
+    private readonly IGetMoviesUseCase _getMoviesUseCase;
 
-    public IndexModel(RazorPagesMovieContext context)
+    public IndexModel(IGetMoviesUseCase getMoviesUseCase)
     {
-        _context = context;
+        this._getMoviesUseCase = getMoviesUseCase;
     }
 
     public IList<Movie> Movie { get;set; } = default!;
@@ -26,26 +25,31 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? MovieGenre { get; set; }
 
+    #region IGetMoviesOutputPort
+    void IGetMoviesOutputPort.Ok(IEnumerable<CleanMovie.Domain.Movie> movie)
+    {
+        Movie = movie.Select(m => new Movie
+        {
+            Genre = m.Genre,
+            Id = m.Id,
+            Price = m.Price,
+            Rating = m.Rating,
+            ReleaseDate = m.ReleaseDate,
+            Title = m.Title
+        }).ToList();
+    }
+    #endregion
+
     public async Task OnGetAsync()
     {
-        // Use LINQ to get list of genres.
-        IQueryable<string> genreQuery = from m in _context.Movie
-                                        orderby m.Genre
-                                        select m.Genre;
+        _getMoviesUseCase.SetOutputPort(this);
 
-        var movies = from m in _context.Movie
-                     select m;
-
-        if (!string.IsNullOrEmpty(SearchString))
-        {
-            movies = movies.Where(s => s.Title != null && s.Title.Contains(SearchString));
-        }
-
-        if (!string.IsNullOrEmpty(MovieGenre))
-        {
-            movies = movies.Where(x => x.Genre == MovieGenre);
-        }
-        Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
-        Movie = await movies.ToListAsync();
+        await _getMoviesUseCase.ExecuteAsync(SearchString, MovieGenre);
+        //// Use LINQ to get list of genres.
+        //IQueryable<string> genreQuery = from m in _context.Movie
+        //                                orderby m.Genre
+        //                                select m.Genre;
+        //
+        //Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
     }
 }
