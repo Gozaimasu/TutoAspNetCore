@@ -1,4 +1,4 @@
-﻿namespace RazorPagesMovie.Application.UseCases.CreateMovie;
+﻿namespace CleanMovie.Application.UseCases.CreateMovie;
 
 public interface ICreateMovieUseCase
 {

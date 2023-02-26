@@ -1,7 +1,7 @@
+using CleanMovie.Application.UseCases.GetMovies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using RazorPagesMovie.Application.UseCases.GetMovies;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;

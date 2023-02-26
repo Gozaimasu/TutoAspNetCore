@@ -1,4 +1,4 @@
-﻿namespace RazorPagesMovie.Application.UseCases.DeleteMovie;
+﻿namespace CleanMovie.Application.UseCases.DeleteMovie;
 
 public interface IDeleteMovieUseCase
 {

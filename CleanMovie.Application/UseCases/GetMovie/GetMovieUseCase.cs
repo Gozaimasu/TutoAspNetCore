@@ -1,6 +1,7 @@
-﻿using CleanMovie.Domain;
+﻿using CleanMovie.Application;
+using CleanMovie.Domain;
 
-namespace RazorPagesMovie.Application.UseCases.GetMovie;
+namespace CleanMovie.Application.UseCases.GetMovie;
 
 internal class GetMovieUseCase : IGetMovieUseCase
 {

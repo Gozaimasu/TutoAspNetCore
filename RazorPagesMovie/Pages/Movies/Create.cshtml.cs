@@ -1,6 +1,6 @@
+using CleanMovie.Application.UseCases.CreateMovie;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesMovie.Application.UseCases.CreateMovie;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;

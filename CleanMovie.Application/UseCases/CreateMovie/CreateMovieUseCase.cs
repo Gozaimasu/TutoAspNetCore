@@ -1,6 +1,7 @@
-﻿using CleanMovie.Domain;
+﻿using CleanMovie.Application;
+using CleanMovie.Domain;
 
-namespace RazorPagesMovie.Application.UseCases.CreateMovie;
+namespace CleanMovie.Application.UseCases.CreateMovie;
 
 internal class CreateMovieUseCase : ICreateMovieUseCase
 {

@@ -1,6 +1,6 @@
 ﻿using CleanMovie.Domain;
 
-namespace RazorPagesMovie.Application;
+namespace CleanMovie.Application;
 
 public interface IMovieRepository
 {

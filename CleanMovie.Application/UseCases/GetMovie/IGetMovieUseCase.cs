@@ -1,4 +1,4 @@
-﻿namespace RazorPagesMovie.Application.UseCases.GetMovie;
+﻿namespace CleanMovie.Application.UseCases.GetMovie;
 
 public interface IGetMovieUseCase
 {

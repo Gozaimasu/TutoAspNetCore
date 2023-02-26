@@ -1,4 +1,4 @@
-﻿namespace RazorPagesMovie.Application.UseCases.EditMovie;
+﻿namespace CleanMovie.Application.UseCases.EditMovie;
 
 public interface IEditMovieUseCase
 {

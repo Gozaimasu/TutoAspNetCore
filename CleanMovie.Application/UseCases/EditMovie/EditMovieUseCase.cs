@@ -1,4 +1,6 @@
-﻿namespace RazorPagesMovie.Application.UseCases.EditMovie;
+﻿using CleanMovie.Application;
+
+namespace CleanMovie.Application.UseCases.EditMovie;
 
 internal class EditMovieUseCase : IEditMovieUseCase
 {

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPagesMovie", "RazorPag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Domain", "CleanMovie.Domain\CleanMovie.Domain.csproj", "{16B98E63-6E55-4270-AF20-A24D66AEEDF1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesMovie.Application", "RazorPagesMovie.Application\RazorPagesMovie.Application.csproj", "{548134AC-87A8-4283-BCBF-9FB4E0F8A253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Application", "CleanMovie.Application\CleanMovie.Application.csproj", "{548134AC-87A8-4283-BCBF-9FB4E0F8A253}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesMovie.Infrastructure", "RazorPagesMovie.Infrastructure\RazorPagesMovie.Infrastructure.csproj", "{3ED250C6-15EB-4C4C-9431-B069B2BCF81C}"
 EndProject

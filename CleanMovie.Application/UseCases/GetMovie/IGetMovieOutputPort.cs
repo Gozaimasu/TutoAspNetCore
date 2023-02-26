@@ -1,6 +1,6 @@
 ﻿using CleanMovie.Domain;
 
-namespace RazorPagesMovie.Application.UseCases.GetMovie;
+namespace CleanMovie.Application.UseCases.GetMovie;
 
 public interface IGetMovieOutputPort
 {

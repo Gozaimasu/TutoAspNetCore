@@ -1,4 +1,6 @@
-﻿namespace RazorPagesMovie.Application.UseCases.GetMovies;
+﻿using CleanMovie.Application;
+
+namespace CleanMovie.Application.UseCases.GetMovies;
 
 internal class GetMoviesUseCase : IGetMoviesUseCase
 {

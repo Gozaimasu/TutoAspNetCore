@@ -1,7 +1,7 @@
+using CleanMovie.Application.UseCases.DeleteMovie;
+using CleanMovie.Application.UseCases.GetMovie;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPagesMovie.Application.UseCases.DeleteMovie;
-using RazorPagesMovie.Application.UseCases.GetMovie;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;

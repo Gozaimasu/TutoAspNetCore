@@ -1,4 +1,6 @@
-﻿namespace RazorPagesMovie.Application.UseCases.DeleteMovie;
+﻿using CleanMovie.Application;
+
+namespace CleanMovie.Application.UseCases.DeleteMovie;
 
 internal class DeleteMovieUseCase : IDeleteMovieUseCase
 {
@@ -14,7 +16,7 @@ internal class DeleteMovieUseCase : IDeleteMovieUseCase
     {
         var movie = await _movieRepository.GetAsync(id, token);
 
-        if(movie == null)
+        if (movie == null)
         {
             _outputPort?.NotFound();
             return;

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CleanMovie.Application;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RazorPagesMovie.Application;
 using RazorPagesMovie.Infrastructure.DataAccess;
 using RazorPagesMovie.Infrastructure.DataAccess.Repositories;
 

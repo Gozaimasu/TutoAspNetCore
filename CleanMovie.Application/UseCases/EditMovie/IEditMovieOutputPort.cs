@@ -1,8 +1,8 @@
 ﻿using CleanMovie.Domain;
 
-namespace RazorPagesMovie.Application.UseCases.CreateMovie;
+namespace CleanMovie.Application.UseCases.EditMovie;
 
-public interface IOutputPort
+public interface IEditMovieOutputPort
 {
     void Ok(Movie movie);
     void NotFound();

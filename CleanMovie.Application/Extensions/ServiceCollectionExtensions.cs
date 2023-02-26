@@ -1,8 +1,8 @@
-﻿using RazorPagesMovie.Application.UseCases.CreateMovie;
-using RazorPagesMovie.Application.UseCases.DeleteMovie;
-using RazorPagesMovie.Application.UseCases.EditMovie;
-using RazorPagesMovie.Application.UseCases.GetMovie;
-using RazorPagesMovie.Application.UseCases.GetMovies;
+﻿using CleanMovie.Application.UseCases.CreateMovie;
+using CleanMovie.Application.UseCases.DeleteMovie;
+using CleanMovie.Application.UseCases.EditMovie;
+using CleanMovie.Application.UseCases.GetMovie;
+using CleanMovie.Application.UseCases.GetMovies;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
