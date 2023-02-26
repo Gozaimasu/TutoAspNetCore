@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPagesMovie", "RazorPagesMovie\RazorPagesMovie.csproj", "{8F68DFBE-F633-4897-832C-839C67937308}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesMovie.Domain", "RazorPagesMovie.Domain\RazorPagesMovie.Domain.csproj", "{16B98E63-6E55-4270-AF20-A24D66AEEDF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Domain", "CleanMovie.Domain\CleanMovie.Domain.csproj", "{16B98E63-6E55-4270-AF20-A24D66AEEDF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesMovie.Application", "RazorPagesMovie.Application\RazorPagesMovie.Application.csproj", "{548134AC-87A8-4283-BCBF-9FB4E0F8A253}"
 EndProject

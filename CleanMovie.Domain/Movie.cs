@@ -1,4 +1,4 @@
-﻿namespace RazorPagesMovie.Domain;
+﻿namespace CleanMovie.Domain;
 
 public class Movie
 {

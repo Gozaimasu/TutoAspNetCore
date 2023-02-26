@@ -40,7 +40,7 @@ public class CreateModel : PageModel, IOutputPort
     }
 
     #region IOutputPort
-    void IOutputPort.Ok(Domain.Movie movie)
+    void IOutputPort.Ok(CleanMovie.Domain.Movie movie)
     {
         _viewModel = RedirectToPage("./Index");
     }

@@ -60,7 +60,7 @@ public class EditModel : PageModel, IEditMovieOutputPort, IGetMovieOutputPort
         _viewModel = NotFound();
     }
 
-    void IEditMovieOutputPort.Ok(Domain.Movie movie)
+    void IEditMovieOutputPort.Ok(CleanMovie.Domain.Movie movie)
     {
         Movie = new Movie
         {
@@ -76,7 +76,7 @@ public class EditModel : PageModel, IEditMovieOutputPort, IGetMovieOutputPort
     #endregion
 
     #region IGetMovieOutputPort
-    void IGetMovieOutputPort.Ok(Domain.Movie movie)
+    void IGetMovieOutputPort.Ok(CleanMovie.Domain.Movie movie)
     {
         Movie = new Movie
         {

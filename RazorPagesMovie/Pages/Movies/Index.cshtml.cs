@@ -26,7 +26,7 @@ public class IndexModel : PageModel, IGetMoviesOutputPort
     public string? MovieGenre { get; set; }
 
     #region IGetMoviesOutputPort
-    void IGetMoviesOutputPort.Ok(IEnumerable<Domain.Movie> movie)
+    void IGetMoviesOutputPort.Ok(IEnumerable<CleanMovie.Domain.Movie> movie)
     {
         Movie = movie.Select(m => new Movie
         {

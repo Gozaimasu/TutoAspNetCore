@@ -1,4 +1,4 @@
-﻿using RazorPagesMovie.Domain;
+﻿using CleanMovie.Domain;
 
 namespace RazorPagesMovie.Application.UseCases.CreateMovie;
 

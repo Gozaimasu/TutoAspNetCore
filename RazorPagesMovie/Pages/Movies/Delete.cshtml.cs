@@ -67,7 +67,7 @@ public class DeleteModel : PageModel, IDeleteMovieOutputPort, IGetMovieOutputPor
         _viewModel = NotFound();
     }
 
-    void IGetMovieOutputPort.Ok(Domain.Movie movie)
+    void IGetMovieOutputPort.Ok(CleanMovie.Domain.Movie movie)
     {
         Movie = new Movie
         {

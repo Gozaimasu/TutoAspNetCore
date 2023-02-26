@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CleanMovie.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using RazorPagesMovie.Application;
-using RazorPagesMovie.Domain;
 
 namespace RazorPagesMovie.Infrastructure.DataAccess.Repositories;
 
