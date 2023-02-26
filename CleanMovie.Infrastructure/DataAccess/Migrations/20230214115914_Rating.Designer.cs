@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RazorPagesMovie.Infrastructure.DataAccess.Migrations
+namespace CleanMovie.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(RazorPagesMovieContext))]
     [Migration("20230214115914_Rating")]

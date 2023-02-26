@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RazorPagesMovie.Infrastructure\RazorPagesMovie.Infrastructure.csproj" />
+      <ProjectReference Include="..\CleanMovie.Infrastructure\CleanMovie.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

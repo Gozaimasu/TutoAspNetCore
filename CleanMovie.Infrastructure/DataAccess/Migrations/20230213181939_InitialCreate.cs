@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RazorPagesMovie.Infrastructure.DataAccess.Migrations
+namespace CleanMovie.Infrastructure.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

@@ -1,4 +1,4 @@
-using RazorPagesMovie.Infrastructure.DataAccess.Models;
+using CleanMovie.Infrastructure.DataAccess.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

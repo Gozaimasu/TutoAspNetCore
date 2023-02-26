@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RazorPagesMovie.Infrastructure.DataAccess.Models;
+namespace CleanMovie.Infrastructure.DataAccess.Models;
 
 public class Movie
 {

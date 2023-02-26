@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace RazorPagesMovie.Infrastructure.DataAccess.Models;
+namespace CleanMovie.Infrastructure.DataAccess.Models;
 
 public static class SeedData
 {

@@ -1,8 +1,8 @@
 ﻿using CleanMovie.Application;
+using CleanMovie.Infrastructure.DataAccess;
+using CleanMovie.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RazorPagesMovie.Infrastructure.DataAccess;
-using RazorPagesMovie.Infrastructure.DataAccess.Repositories;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

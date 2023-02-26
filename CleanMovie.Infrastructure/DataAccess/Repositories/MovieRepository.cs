@@ -3,7 +3,7 @@ using CleanMovie.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace RazorPagesMovie.Infrastructure.DataAccess.Repositories;
+namespace CleanMovie.Infrastructure.DataAccess.Repositories;
 
 internal class MovieRepository : IMovieRepository
 {
