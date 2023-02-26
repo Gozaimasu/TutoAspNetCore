@@ -1,18 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using RazorPagesMovie.Data;
+using RazorPagesMovie.Application.UseCases.DeleteMovie;
+using RazorPagesMovie.Application.UseCases.GetMovie;
 using RazorPagesMovie.Models;
 
 namespace RazorPagesMovie.Pages.Movies;
 
-public class DeleteModel : PageModel
+public class DeleteModel : PageModel, IDeleteMovieOutputPort, IGetMovieOutputPort
 {
-    private readonly RazorPagesMovieContext _context;
+    private readonly IDeleteMovieUseCase _deleteMovieUseCase;
+    private readonly IGetMovieUseCase _getMovieUseCase;
+    private IActionResult? _viewModel;
 
-    public DeleteModel(RazorPagesMovieContext context)
+    public DeleteModel(IDeleteMovieUseCase deleteMovieUseCase, IGetMovieUseCase getMovieUseCase)
     {
-        _context = context;
+        _deleteMovieUseCase = deleteMovieUseCase;
+        _getMovieUseCase = getMovieUseCase;
     }
 
     [BindProperty]
@@ -25,15 +28,10 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+        _getMovieUseCase.SetOutputPort(this);
+        await _getMovieUseCase.ExecuteAsync(id.Value);
 
-        if (movie == null)
-        {
-            return NotFound();
-        }
-
-        Movie = movie;
-        return Page();
+        return _viewModel!;
     }
 
     public async Task<IActionResult> OnPostAsync(int? id)
@@ -42,14 +40,45 @@ public class DeleteModel : PageModel
         {
             return NotFound();
         }
-        var movie = await _context.Movie.FindAsync(id);
 
-        if (movie == null) return RedirectToPage("./Index");
-        
-        Movie = movie;
-        _context.Movie.Remove(Movie);
-        await _context.SaveChangesAsync();
+        _deleteMovieUseCase.SetOutputPort(this);
 
-        return RedirectToPage("./Index");
+        await _deleteMovieUseCase.ExecuteAsync(id.Value);
+
+        return _viewModel!;
     }
+
+    #region IDeleteMovieOutputPort
+    void IDeleteMovieOutputPort.NotFound()
+    {
+        _viewModel = NotFound();
+    }
+
+    void IDeleteMovieOutputPort.Ok()
+    {
+        _viewModel = RedirectToPage("./Index");
+    }
+    #endregion
+
+    #region IGetMovieOutputPort
+
+    void IGetMovieOutputPort.NotFound()
+    {
+        _viewModel = NotFound();
+    }
+
+    void IGetMovieOutputPort.Ok(Domain.Movie movie)
+    {
+        Movie = new Movie
+        {
+            Genre = movie.Genre,
+            Id = movie.Id,
+            Price = movie.Price,
+            Rating = movie.Rating,
+            ReleaseDate = movie.ReleaseDate,
+            Title = movie.Title
+        };
+        _viewModel = Page();
+    }
+    #endregion
 }
