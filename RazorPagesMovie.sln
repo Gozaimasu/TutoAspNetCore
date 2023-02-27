@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPagesMovie", "RazorPagesMovie\RazorPagesMovie.csproj", "{8F68DFBE-F633-4897-832C-839C67937308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesMovie", "RazorPagesMovie\RazorPagesMovie.csproj", "{8F68DFBE-F633-4897-832C-839C67937308}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Domain", "CleanMovie.Domain\CleanMovie.Domain.csproj", "{16B98E63-6E55-4270-AF20-A24D66AEEDF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Application", "CleanMovie.Application\CleanMovie.Application.csproj", "{548134AC-87A8-4283-BCBF-9FB4E0F8A253}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanMovie.Infrastructure", "CleanMovie.Infrastructure\CleanMovie.Infrastructure.csproj", "{3ED250C6-15EB-4C4C-9431-B069B2BCF81C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieMVC", "MovieMVC\MovieMVC.csproj", "{7E571961-4DBD-47F9-96ED-F50BBE710745}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +35,15 @@ Global
 		{3ED250C6-15EB-4C4C-9431-B069B2BCF81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED250C6-15EB-4C4C-9431-B069B2BCF81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED250C6-15EB-4C4C-9431-B069B2BCF81C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E571961-4DBD-47F9-96ED-F50BBE710745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E571961-4DBD-47F9-96ED-F50BBE710745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E571961-4DBD-47F9-96ED-F50BBE710745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E571961-4DBD-47F9-96ED-F50BBE710745}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E130466-CDDD-4823-9853-D81C52FE6554}
 	EndGlobalSection
 EndGlobal
