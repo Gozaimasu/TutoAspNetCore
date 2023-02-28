@@ -1,34 +1,46 @@
 ﻿using CleanMovie.Application.UseCases.CreateMovie;
+using CleanMovie.Application.UseCases.EditMovie;
+using CleanMovie.Application.UseCases.GetMovie;
 using CleanMovie.Application.UseCases.GetMovies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MovieMVC.Models;
 
 namespace MovieMVC.Controllers;
 
-public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort
+public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort, IGetMovieOutputPort, IEditMovieOutputPort
 {
     private readonly IGetMoviesUseCase _getMoviesUseCase;
     private readonly ICreateMovieUseCase _createMovieUseCase;
+    private readonly IEditMovieUseCase _editMovieUseCase;
+    private readonly IGetMovieUseCase _getMovieUseCase;
 
-    private ActionResult? result;
+    private ActionResult? _result;
 
     public MoviesController(
         IGetMoviesUseCase getMoviesUseCase,
-        ICreateMovieUseCase createMovieUseCase)
+        ICreateMovieUseCase createMovieUseCase,
+        IEditMovieUseCase editMovieUseCase,
+        IGetMovieUseCase getMovieUseCase)
     {
         _getMoviesUseCase = getMoviesUseCase;
         _createMovieUseCase = createMovieUseCase;
+        _editMovieUseCase = editMovieUseCase;
+        _getMovieUseCase = getMovieUseCase;
     }
 
+    #region Index
     public async Task<ActionResult> Index(string? searchString, string? movieGenre)
     {
         _getMoviesUseCase.SetOutputPort(this);
 
         await _getMoviesUseCase.ExecuteAsync(searchString, movieGenre);
 
-        return result!;
+        return _result!;
     }
+    #endregion
 
+    #region Create
     public ActionResult Create()
     {
         return View();
@@ -46,10 +58,46 @@ public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort
         _createMovieUseCase.SetOutputPort(this);
 
         await _createMovieUseCase.ExecuteAsync(movie.Title!, movie.ReleaseDate, movie.Genre!, movie.Price, movie.Rating);
-        
-        return result!;
+
+        return _result!;
 
     }
+    #endregion
+
+    #region Edit
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        _getMovieUseCase.SetOutputPort(this);
+        await _getMovieUseCase.ExecuteAsync(id.Value);
+
+        return _result!;
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+    {
+        if (id != movie.Id)
+        {
+            return NotFound();
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
+        _editMovieUseCase.SetOutputPort(this);
+        await _editMovieUseCase.ExecuteAsync(id, movie.Title!, movie.ReleaseDate, movie.Genre!, movie.Price, movie.Rating);
+
+        return _result!;
+    }
+    #endregion
 
     #region IGetMoviesOutputPort
     void IGetMoviesOutputPort.Ok(IEnumerable<CleanMovie.Domain.Movie> movie)
@@ -66,24 +114,62 @@ public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort
                 Title = m.Title
             }).ToList()
         };
-        result = View(model);
+        _result = View(model);
     }
     #endregion
 
     #region IOutputPort
     void IOutputPort.Ok(CleanMovie.Domain.Movie movie)
     {
-        result = RedirectToAction("Index");
+        _result = RedirectToAction("Index");
     }
 
     void IOutputPort.NotFound()
     {
-        result = NotFound();
+        _result = NotFound();
     }
 
     void IOutputPort.Invalid()
     {
-        result = View();
+        _result = View();
+    }
+    #endregion
+
+    #region IGetMovieOutputPort
+    void IGetMovieOutputPort.Ok(CleanMovie.Domain.Movie movie)
+    {
+        var model = new Movie
+        {
+            Genre = movie.Genre,
+            Id = movie.Id,
+            Price = movie.Price,
+            Rating = movie.Rating,
+            ReleaseDate = movie.ReleaseDate,
+            Title = movie.Title
+        };
+        _result = View(model);
+    }
+
+    void IGetMovieOutputPort.NotFound()
+    {
+        _result = NotFound();
+    }
+    #endregion
+
+    #region IEditMovieOutputPort
+    void IEditMovieOutputPort.Ok(CleanMovie.Domain.Movie movie)
+    {
+        _result = RedirectToAction("Index");
+    }
+
+    void IEditMovieOutputPort.NotFound()
+    {
+        _result = NotFound();
+    }
+
+    void IEditMovieOutputPort.Invalid()
+    {
+        _result = View();
     }
     #endregion
 }
