@@ -8,7 +8,11 @@ using MovieMVC.Models;
 
 namespace MovieMVC.Controllers;
 
-public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort, IGetMovieOutputPort, IEditMovieOutputPort
+public class MoviesController : Controller, 
+                                IGetMoviesOutputPort, 
+                                IOutputPort, 
+                                IGetMovieOutputPort, 
+                                IEditMovieOutputPort
 {
     private readonly IGetMoviesUseCase _getMoviesUseCase;
     private readonly ICreateMovieUseCase _createMovieUseCase;
@@ -65,7 +69,7 @@ public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort, I
     #endregion
 
     #region Edit
-    public async Task<IActionResult> Edit(int? id)
+    public async Task<ActionResult> Edit(int? id)
     {
         if (id == null)
         {
@@ -80,7 +84,7 @@ public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort, I
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+    public async Task<ActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
     {
         if (id != movie.Id)
         {
@@ -94,6 +98,21 @@ public class MoviesController : Controller, IGetMoviesOutputPort, IOutputPort, I
 
         _editMovieUseCase.SetOutputPort(this);
         await _editMovieUseCase.ExecuteAsync(id, movie.Title!, movie.ReleaseDate, movie.Genre!, movie.Price, movie.Rating);
+
+        return _result!;
+    }
+    #endregion
+
+    #region Details
+    public async Task<ActionResult> Details(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        _getMovieUseCase.SetOutputPort(this);
+        await _getMovieUseCase.ExecuteAsync(id.Value);
 
         return _result!;
     }
