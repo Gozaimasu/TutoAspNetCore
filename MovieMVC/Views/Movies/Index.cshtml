@@ -1,5 +1,4 @@
-@page
-@model IndexModel
+﻿@model MovieMVC.Models.MovieGenreViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 
 <form>
@@ -25,25 +24,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Title)
+                @Html.DisplayNameFor(model => model.Movies[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+                @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Genre)
+                @Html.DisplayNameFor(model => model.Movies[0].Genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Price)
+                @Html.DisplayNameFor(model => model.Movies[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Rating)
+                @Html.DisplayNameFor(model => model.Movies[0].Rating)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Movie)
+        @foreach (var item in Model.Movies)
         {
             <tr>
                 <td>
@@ -62,9 +61,6 @@
                     @Html.DisplayFor(modelItem => item.Rating)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
