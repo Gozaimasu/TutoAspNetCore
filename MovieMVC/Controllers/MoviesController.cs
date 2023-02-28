@@ -1,4 +1,5 @@
 ﻿using CleanMovie.Application.UseCases.CreateMovie;
+using CleanMovie.Application.UseCases.DeleteMovie;
 using CleanMovie.Application.UseCases.EditMovie;
 using CleanMovie.Application.UseCases.GetMovie;
 using CleanMovie.Application.UseCases.GetMovies;
@@ -12,25 +13,28 @@ public class MoviesController : Controller,
                                 IGetMoviesOutputPort, 
                                 IOutputPort, 
                                 IGetMovieOutputPort, 
-                                IEditMovieOutputPort
+                                IEditMovieOutputPort,
+                                IDeleteMovieOutputPort
 {
     private readonly IGetMoviesUseCase _getMoviesUseCase;
     private readonly ICreateMovieUseCase _createMovieUseCase;
     private readonly IEditMovieUseCase _editMovieUseCase;
     private readonly IGetMovieUseCase _getMovieUseCase;
-
+    private readonly IDeleteMovieUseCase _deleteMovieUseCase;
     private ActionResult? _result;
 
     public MoviesController(
         IGetMoviesUseCase getMoviesUseCase,
         ICreateMovieUseCase createMovieUseCase,
         IEditMovieUseCase editMovieUseCase,
-        IGetMovieUseCase getMovieUseCase)
+        IGetMovieUseCase getMovieUseCase,
+        IDeleteMovieUseCase deleteMovieUseCase)
     {
         _getMoviesUseCase = getMoviesUseCase;
         _createMovieUseCase = createMovieUseCase;
         _editMovieUseCase = editMovieUseCase;
         _getMovieUseCase = getMovieUseCase;
+        _deleteMovieUseCase = deleteMovieUseCase;
     }
 
     #region Index
@@ -118,6 +122,31 @@ public class MoviesController : Controller,
     }
     #endregion
 
+    #region Delete
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        _getMovieUseCase.SetOutputPort(this);
+        await _getMovieUseCase.ExecuteAsync(id.Value);
+
+        return _result!;
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        _deleteMovieUseCase.SetOutputPort(this);
+        await _deleteMovieUseCase.ExecuteAsync(id);
+
+        return _result!;
+    }
+    #endregion
+
     #region IGetMoviesOutputPort
     void IGetMoviesOutputPort.Ok(IEnumerable<CleanMovie.Domain.Movie> movie)
     {
@@ -189,6 +218,18 @@ public class MoviesController : Controller,
     void IEditMovieOutputPort.Invalid()
     {
         _result = View();
+    }
+    #endregion
+
+    #region IDeleteMovieOutputPort
+    void IDeleteMovieOutputPort.Ok()
+    {
+        _result = RedirectToAction("Index");
+    }
+
+    void IDeleteMovieOutputPort.NotFound()
+    {
+        _result= NotFound();
     }
     #endregion
 }
